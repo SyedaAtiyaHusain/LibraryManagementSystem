@@ -1,13 +1,18 @@
-from student import *
+from student import *                                                   #importing necessary modules.                                                   
 from faculty import *
 from book import *
-from datetime import date
+from datetime import date                                               #importing necessary libraries.
+import datetime
 import pickle
+
 ls=[]
 lf=[]
 lb=[]
 
 def check_student(r_no):
+        
+    """This function is defined so as to check whether the student already exist in the system."""
+    
     try:
         with open("student_record.pkl","rb") as f:
             obj=pickle.load(f)
@@ -24,6 +29,9 @@ def check_student(r_no):
 
     
 def add_student():
+    
+    """This function is defined to add a student record in the system"""
+    
     name=input("Enter the name of the student:")
     branch=input("Enter the branch of the student:")
     while True:
@@ -48,6 +56,9 @@ def add_student():
             pickle.dump(ls,f)    
 
 def display_student(obj):
+        
+    """This function is defined to display a student record"""
+    
     print("*"*70)
     print(f"Name:{obj.s_name}")
     print(f"Branch:{obj.branch}")
@@ -60,8 +71,11 @@ def display_student(obj):
         print(f"Books issued:{obj.student_dict}")
     print(f"Total number of book issued:{obj.s_bookissued}")
     print("*"*70)
-#3
+
 def print_student():
+        
+    """This function is defined to display record of every student whose record is added to the system"""
+    
     try:
         with open("student_record.pkl","rb") as f:
             obj=pickle.load(f)
@@ -76,6 +90,9 @@ def print_student():
         print("No Record Found")
         
 def check_faculty(fac_id):
+        
+    """This function is defined to check whether the faculty already exist in the system. """
+    
     try:
         with open("faculty_record.pkl","rb") as f:
             obj=pickle.load(f)
@@ -92,6 +109,9 @@ def check_faculty(fac_id):
     
     
 def add_faculty():
+        
+    """This function is defined to add a faculty record in the system"""
+    
     name=input("Enter faculty name: ")    
     while True:
         fac_id=input("Enter the Faculty Id:")
@@ -124,14 +144,21 @@ def check_book(isbn,copies):
                     return False
     except:
         return False
-    #==================================
+  
 def display_faculty(obj):
+    
+    """This function is defined to display a faculty record"""
+    
     print("*"*70)
     print(f"Faculty name:{obj.ename}")
     print(f"Faculty ID:{obj.eid}")
     print(f"Book issued:{obj.fac_dict}")
     print("*"*70)
+    
 def print_faculty():
+            
+    """This function is defined to display record of every faculty whose record is added to the system"""
+   
     try:
         with open("faculty_record.pkl","rb") as f:
             l=pickle.load(f)
@@ -145,6 +172,9 @@ def print_faculty():
     except:
         print("No Record Found!")  
 def add_book():
+    
+    """This function is defined to add a book in the system. """
+    
     title=input("Enter the title of the book:")
     author=input("Enter the author of the book:")
     while True:
@@ -162,6 +192,9 @@ def add_book():
             pickle.dump(lb,f)
             
 def display_book(obj):
+    
+    """ This function is defined to display a book record present in the system. """
+    
     print("*"*70)
     print(f"Title:{obj.title}")
     print(f"Author:{obj.author}")
@@ -169,8 +202,10 @@ def display_book(obj):
     print(f"Number of copies:{obj.copies}")
     print("*"*70)
           
-#9
 def print_book():
+    
+    """ This function is defined to display every book record present in the system. """
+    
     try:
         with open("book_record.pkl","rb") as f:
             l=pickle.load(f)
@@ -184,9 +219,13 @@ def print_book():
     except:
         print("No Record Found!")
         
-        
-
 def search_book(mode,data):
+    
+    """
+    This function is defined to search a book by either its ISBN or by its Author name or by its Title.
+    If the book is found then it will display all the details of the book otherwise it will display a message of "Not Found"
+    """
+    
     with open("book_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
@@ -219,8 +258,7 @@ def search_book(mode,data):
                     print("Not Found")
         else:
             print("Wrong choice.!!PLEASE Enter correct mode")
-            
-            
+             
 def modify_student_issue(rollno,isbn,l):
     with open("student_record.pkl","rb") as f:
         obj=pickle.load(f)
@@ -290,7 +328,7 @@ def already_have(isbn,rollno):
                 return False
         
         
-import datetime
+
 def issue_book_student():
     rollno=input("Enter roll number of the student:")
     if check_student(rollno):
@@ -309,7 +347,7 @@ def issue_book_student():
     else:
         print("Student not found!! Cannot issue book")
        
- #/////////////////////////////////////////////////////////////////////////////////////////   
+ 
         
 def modify_student_return(rollno,isbn):
     with open("student_record.pkl","rb") as f:
@@ -352,7 +390,6 @@ def return_book_student():
             print("Book with this isbn is not issued to this student")
     else:
         print("Student not found")
-#//////////////////////////////////////////////////////////////////////////////////////
 
 def modify_book_issue(isbn,copies):
     with open("book_record.pkl","rb") as f:
@@ -418,8 +455,6 @@ def issue_book_faculty():
     else:
         print("Faculty does not exist!!")
                             
-#//////////////////////////////////////////////////////////////////////////
-
 def modify_fac_return(fac_id,isbn,co):
     with open("faculty_record.pkl","rb") as f:
         obj=pickle.load(f)
