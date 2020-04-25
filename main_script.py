@@ -1,5 +1,7 @@
 """ 
+Title: Library Management System
 Developed by:Syeda Atiya Husain
+Language:Python
 Requirements:
             Python version: Python3 or later
             Necessary Libraries: 1) pickle
